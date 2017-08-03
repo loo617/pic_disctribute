@@ -65,7 +65,7 @@ imagenets = ['Dreamstime',
             'Fotolia',
             'iStockphotos']
 # 第几个图片库
-i = 2
+i = 6
 try:
     pics = filter_pics(connection, imagenets[i])
 finally:

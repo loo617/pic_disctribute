@@ -39,7 +39,7 @@ def upt_pic_distribute(connection, imagenet, ids):
 
 
 # 数据库连接配置
-connection = pymysql.connect(host='localhost',user='root',password='',db='origino',charset='utf8',cursorclass=pymysql.cursors.DictCursor)
+connection = pymysql.connect(host='localhost',user='root',password='123456',db='origino',charset='utf8',cursorclass=pymysql.cursors.DictCursor)
 imagenets = ['Dreamstime',
             'Alamy',
             'Pond5',
@@ -49,13 +49,18 @@ imagenets = ['Dreamstime',
             '123RF',
             'Fotolia',
             'iStockphotos']
-i = 0
+i = 6
 try:
     download_pics = GetFileList('f:\\'+imagenets[i]+'\\', [])
     rm1 = 'f:\\'+imagenets[i]+'\\'
     rm2 = '.jpg'
     # 已下载图片id
+    ids = ''
     download_ids = select_download_picid(download_pics, rm1, rm2)
+    for id in download_ids:
+        ids += str(id)
+        ids += ','
+    idss = ids[:-1].split(',')
     rows = upt_pic_distribute(connection, imagenets[i], download_ids)
     print ('更新记录数:'+rows)
 finally:

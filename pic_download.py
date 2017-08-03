@@ -48,13 +48,13 @@ imagenets = ['Dreamstime',
             '123RF',
             'Fotolia',
             'iStockphotos']
-start = 6820
+start = 0
 end = 100000
 try:
     pics = select_wait_distribute(connection, start, end)
 finally:
     connection.close()
-    count = 6820
+    count = 0
     for pic in pics:
         url = pic['PI_SrcUrl']+'!'+pic['PI_FieldID']+'?_upd=true'
         path = 'f:\\distribute\\'+str(pic['PI_ID'])+'.jpg'
