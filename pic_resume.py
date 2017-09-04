@@ -1,5 +1,5 @@
 # coding:utf8
-# 下载还没有下载的国际分发图片
+# 下载国际分发图片(支持断点续传)
 import os
 import pymysql.cursors
 from urllib import urlretrieve
@@ -77,6 +77,7 @@ def auto_down(url, filename):
 
 
 connection = pymysql.connect(host='localhost',user='root',password='123456',db='origino',charset='utf8',cursorclass=pymysql.cursors.DictCursor)
+# 图库选择
 imagenets = ['Dreamstime',
             'Alamy',
             'Pond5',
@@ -92,12 +93,12 @@ total_pics = select_wait_distribute(connection)
 total_ids = []
 for pic in total_pics:
     total_ids.append(pic['PI_ID'])
-download_pics = GetFileList('f:\\distribute\\', [])
-rm1 = 'f:\\distribute\\'
+download_pics = GetFileList('c:\\distribute_ok\\', [])
+rm1 = 'c:\\distribute_ok\\'
 rm2 = '.jpg'
-#已下载图片id
+# 已下载图片id
 download_ids = select_download_picid(download_pics, rm1, rm2)
-#图片还剩id
+# 图片还剩id
 not_download_ids = select_not_download_picid(total_ids, download_ids)
 ids = ''
 for id in not_download_ids:
@@ -109,7 +110,7 @@ connection.close()
 for pic in pics:
     if pic['PI_SrcUrl'] != '':
         url = pic['PI_SrcUrl'] + '!' + pic['PI_FieldID'] + '?_upd=true'
-        path = 'f:\\distribute\\' + str(pic['PI_ID']) + '.jpg'
+        path = 'c:\\distribute_ok\\' + str(pic['PI_ID']) + '.jpg'
         auto_down(url, path)
         count += 1
         print "已下载数量: " + str(count) + "图片编号：" + str(pic['PI_SrcUrl'])

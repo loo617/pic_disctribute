@@ -49,7 +49,7 @@ imagenets = ['Dreamstime',
             '123RF',
             'Fotolia',
             'iStockphotos']
-i = 6
+i = 5
 try:
     download_pics = GetFileList('f:\\'+imagenets[i]+'\\', [])
     rm1 = 'f:\\'+imagenets[i]+'\\'
@@ -60,8 +60,8 @@ try:
     for id in download_ids:
         ids += str(id)
         ids += ','
-    idss = ids[:-1].split(',')
-    rows = upt_pic_distribute(connection, imagenets[i], download_ids)
-    print ('更新记录数:'+rows)
+    print ids[:-1]
+    # idss = ids[:-1].split(',')
+    # rows = upt_pic_distribute(connection, imagenets[i], download_ids)
 finally:
     connection.close()

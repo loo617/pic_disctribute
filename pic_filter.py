@@ -2,6 +2,7 @@
 import pymysql.cursors
 import os
 import shutil
+# 筛选各个图库需分发的图片并复制到指定文件夹
 
 # 筛选各个图库需分发的图片
 def filter_pics(connection, storage):
@@ -65,7 +66,7 @@ imagenets = ['Dreamstime',
             'Fotolia',
             'iStockphotos']
 # 第几个图片库
-i = 6
+i = 5
 try:
     pics = filter_pics(connection, imagenets[i])
 finally:
